@@ -73,37 +73,42 @@ const Dictionary = () => {
           </div>
           <br />
           {data.map((item, index) => {
+            const src = ()=>{
+            if(data[0].phonetics[0].audio === "" && data[0].phonetics.length > 1){
+              // console.log(data[0].phonetics.length)
+              return data[0].phonetics[1].audio
+            }else{
+              return data[0].phonetics[0].audio
+            }}
+
             return (
               <div key={index}>
                 <audio
                   ref={audioRef}
-                  src={
-                    data[0].phonetics[0].audio === ""
-                      ? data[0].phonetics[1].audio
-                      : data[0].phonetics[0].audio
-                  }
+                  src={src()}
                   id="sound"
                 ></audio>
-                {data[0].meanings.map((item, index) => {
+                {item.meanings.map((part, index) => {
                   return (
-                    <div id={index} className='contain'>
+                    <div key={index} className='contain'>
+                    <h4>Meaning as {part.partOfSpeech === ('adjective' || 'adverb') ? 'an' : 'a'} {part.partOfSpeech}</h4>
                       <div className="details">
-                        <p style={{fontSize: "15px"}}>{item.partOfSpeech}</p>
+                        <p style={{fontSize: "15px"}}>{part.partOfSpeech}</p>
                         <p style={{fontSize: "15px"}}>{data[0].phonetic}</p>
                       </div>
                       <h4>Antonyms: </h4>
                       <ul>
-                        {item.antonyms.map((item, index) => {
-                          return <li key={index}>{item}</li>;
+                        {part.antonyms.map((changes, index) => {
+                          return <li key={index}>{changes}</li>;
                         })}
                       </ul>
                       <h4>Synonyms: </h4>
                       <ul>
-                        {item.synonyms.map((item, index) => {
-                          return <li key={index}>{item}</li>;
+                        {part.synonyms.map((changes, index) => {
+                          return <li key={index}>{changes}</li>;
                         })}
                       </ul>
-                      {item.definitions.map((define, index) => {
+                      {part.definitions.map((define, index) => {
                         return (
                           <div key={index}>
                             <ul className="word-meaning">

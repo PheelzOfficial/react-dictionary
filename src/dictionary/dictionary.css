@@ -94,3 +94,18 @@ body {
     border-radius: 15px;
     padding: 5px 0;
 }
+
+
+@media screen and (max-width: 600px) {
+    .container {
+        background-color: #ffffff;
+        width: 70vmin;
+        position: absolute;
+        /* transform: translate(-50%, -50%); */
+        top: 10%;
+        left: 13%;
+        padding: 80px 50px;
+        border-radius: 10px;
+        box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+    }
+  }
